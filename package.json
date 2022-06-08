@@ -1,6 +1,6 @@
 {
   "name": "@x-qdo/connected-react-router",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "description": "A Redux binding for React Router v6",
   "main": "lib/index.js",
   "module": "esm/index.js",
