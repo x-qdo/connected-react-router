@@ -1,16 +1,16 @@
-> Breaking change in v5.0.0! Please read [How to migrate from v4 to v5/v6](https://github.com/supasate/connected-react-router/blob/master/FAQ.md#how-to-migrate-from-v4-to-v5v6).
+> v7.0.0 requires React v18.0.0 and React Redux v8.0.
 
-> v6.0.0 requires React v16.4.0 and React Redux v6.0 / v7.0.
+> This is fork of original [connected-react-router](https://github.com/supasate/connected-react-router) repo with upgrade patch for React v18.
 
 Connected React Router [![Build Status](https://travis-ci.org/supasate/connected-react-router.svg?branch=master)](https://travis-ci.org/supasate/connected-react-router) [![Open Source Helpers](https://www.codetriage.com/supasate/connected-react-router/badges/users.svg)](https://www.codetriage.com/supasate/connected-react-router)
 ======================
-A Redux binding for React Router v4 and v5
+A Redux binding for React Router v6
 
 Main features
 -------------
 :sparkles: Synchronize router state with redux store through uni-directional flow (i.e. history -> store -> router -> components).
 
-:gift: Supports [React Router v4 and v5](https://github.com/ReactTraining/react-router).
+:gift: Supports [React Router v6](https://github.com/ReactTraining/react-router).
 
 :sunny: Supports functional component hot reloading while preserving state (with [react-hot-reload](https://github.com/gaearon/react-hot-loader)).
 
@@ -27,7 +27,7 @@ Main features
 
 Installation
 -----------
-Connected React Router requires **React 16.4 and React Redux 6.0 or later**.
+Connected React Router requires **React 18.0 and React Redux 8.0 or later**.
 
 
     npm install --save connected-react-router
@@ -99,7 +99,7 @@ export default function configureStore(preloadedState) {
 // index.js
 ...
 import { Provider } from 'react-redux'
-import { Route, Switch } from 'react-router' // react-router v4/v5
+import { Route, Routes } from 'react-router' // react-router v6
 import { ConnectedRouter } from 'connected-react-router'
 import configureStore, { history } from './configureStore'
 ...
@@ -108,11 +108,11 @@ const store = configureStore(/* provide initial state if any */)
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}> { /* place ConnectedRouter under Provider */ }
-      <> { /* your usual react-router v4/v5 routing */ }
-        <Switch>
-          <Route exact path="/" render={() => (<div>Match</div>)} />
-          <Route render={() => (<div>Miss</div>)} />
-        </Switch>
+      <> { /* your usual react-router v6 routing */ }
+        <Routes>
+          <Route path="/" element={<div>Match</div>} />
+          <Route path="*" element={<div>Miss</div>} />
+        </Routes>
       </>
     </ConnectedRouter>
   </Provider>,

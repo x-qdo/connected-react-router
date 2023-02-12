@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect, ReactReduxContext } from 'react-redux'
-import { Router } from 'react-router'
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import isEqualWith from 'lodash.isequalwith'
 import { onLocationChanged } from './actions'
 import createSelectors from './selectors'
@@ -67,7 +67,7 @@ const createConnectedRouter = (structure) => {
         }
       })
 
-      const handleLocationChange = (location, action, isFirstRendering = false) => {
+      const handleLocationChange = ({location, action}, isFirstRendering = false) => {
         // Dispatch onLocationChanged except when we're in time travelling
         if (!this.inTimeTravelling) {
           onLocationChanged(location, action, isFirstRendering)
@@ -83,7 +83,7 @@ const createConnectedRouter = (structure) => {
         // Dispatch a location change action for the initial location.
         // This makes it backward-compatible with react-router-redux.
         // But, we add `isFirstRendering` to `true` to prevent double-rendering.
-        handleLocationChange(history.location, history.action, true)
+        handleLocationChange(history, true)
       }
     }
 
@@ -104,9 +104,9 @@ const createConnectedRouter = (structure) => {
       }
 
       return (
-        <Router history={history}>
+        <HistoryRouter history={history}>
           { children }
-        </Router>
+        </HistoryRouter>
       )
     }
   }
